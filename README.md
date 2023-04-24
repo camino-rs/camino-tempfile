@@ -9,7 +9,7 @@
 
 A secure, cross-platform, temporary file library for Rust with UTF-8 paths.
 
-This crate is a wrapper around [`tempfile`](https://crates.io/crates/tempfile) that works with the `Utf8Path` and `Utf8PathBuf` types defined by [`camino`](https://crates.io/crates/camino). If your code mostly uses [`camino`], it can be annoying to have to convert temporary paths to
+This crate is a wrapper around [`tempfile`](https://crates.io/crates/tempfile) that works with the `Utf8Path` and `Utf8PathBuf` types defined by [`camino`](https://crates.io/crates/camino). If your code mostly uses `camino`, it can be annoying to have to convert temporary paths to
 `Utf8Path` over and over again. This crate manages that for you.
 
 In addition to creating temporary files, this library also allows users to securely open multiple independent references to the same temporary file (useful for consumer/producer patterns and surprisingly difficult to implement securely).
