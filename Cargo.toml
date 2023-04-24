@@ -1,6 +1,6 @@
 [package]
 name = "camino-tempfile"
-version = "1.0.0-pre"
+version = "1.0.0"
 edition = "2018"
 rust-version = "1.48"
 license = "MIT OR Apache-2.0"
