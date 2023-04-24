@@ -29,6 +29,7 @@ camino-tempfile = "1"
 
 ## Example
 
+```rust
 use std::fs::File;
 use std::io::{Write, Read, Seek, SeekFrom};
 
@@ -45,6 +46,7 @@ fn main() {
     tmpfile.read_to_string(&mut buf).unwrap();
     assert_eq!("Hello World!", buf);
 }
+```
 
 ## License
 
