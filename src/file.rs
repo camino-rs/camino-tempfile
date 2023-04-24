@@ -808,7 +808,7 @@ impl<F> NamedUtf8TempFile<F> {
 
     /// Get a reference to the underlying file.
     pub fn as_file(&self) -> &F {
-        &self.inner.as_file()
+        self.inner.as_file()
     }
 
     /// Get a mutable reference to the underlying file.

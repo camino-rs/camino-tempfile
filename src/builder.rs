@@ -6,17 +6,9 @@ use camino::{Utf8Path, Utf8PathBuf};
 use std::{convert::TryFrom, io};
 
 /// Create a new temporary file or directory with custom parameters.
-#[derive(Debug, Clone, Eq, PartialEq)]
+#[derive(Debug, Clone, Default, Eq, PartialEq)]
 pub struct Builder<'a, 'b> {
     inner: tempfile::Builder<'a, 'b>,
-}
-
-impl<'a, 'b> Default for Builder<'a, 'b> {
-    fn default() -> Self {
-        Builder {
-            inner: Default::default(),
-        }
-    }
 }
 
 impl<'a, 'b> Builder<'a, 'b> {
