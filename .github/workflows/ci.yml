@@ -41,6 +41,11 @@ jobs:
         rust-version:
           - "1.48"
           - stable
+        exclude:
+          # This version fails with "archive member 'lib.rmeta' with length xxxxx is not
+          # mach-o or llvm bitcode file".
+          - os: macos-latest
+            rust-version: "1.48"
       fail-fast: false
     env:
       RUSTFLAGS: -D warnings
