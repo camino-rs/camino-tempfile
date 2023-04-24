@@ -2,10 +2,12 @@
 
 use camino::{Utf8Path, Utf8PathBuf};
 use camino_tempfile::{tempdir, Builder, NamedUtf8TempFile, Utf8TempPath};
-use std::env;
-use std::fs::File;
-use std::io::{Read, Seek, SeekFrom, Write};
-use std::path::Path;
+use std::{
+    env,
+    fs::File,
+    io::{Read, Seek, SeekFrom, Write},
+    path::Path,
+};
 
 fn exists<P: AsRef<Path>>(path: P) -> bool {
     std::fs::metadata(path.as_ref()).is_ok()
@@ -389,9 +391,13 @@ fn test_make_uds() {
 #[cfg(unix)]
 #[test]
 fn test_make_uds_conflict() {
-    use std::os::unix::net::UnixListener;
-    use std::sync::atomic::{AtomicUsize, Ordering};
-    use std::sync::Arc;
+    use std::{
+        os::unix::net::UnixListener,
+        sync::{
+            atomic::{AtomicUsize, Ordering},
+            Arc,
+        },
+    };
 
     // Check that retries happen correctly by racing N different threads.
 

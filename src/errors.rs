@@ -1,9 +1,8 @@
 // Copyright (c) The camino-tempfile Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-use std::{error, fmt, io};
-
 use camino::Utf8PathBuf;
+use std::{error, fmt, io};
 
 #[derive(Debug)]
 struct Utf8PathError {

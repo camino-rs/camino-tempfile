@@ -1,18 +1,20 @@
 // Copyright (c) The camino-tempfile Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-use std::convert::{TryFrom, TryInto};
-use std::ffi::OsStr;
-use std::io::{Read, Seek, SeekFrom, Write};
-use std::ops::Deref;
-use std::path::Path;
-use std::{error, fmt, fs::File, io};
-
+use crate::{errors::IoResultExt, Builder};
 use camino::{Utf8Path, Utf8PathBuf};
+use std::{
+    convert::{TryFrom, TryInto},
+    error,
+    ffi::OsStr,
+    fmt,
+    fs::File,
+    io,
+    io::{Read, Seek, SeekFrom, Write},
+    ops::Deref,
+    path::Path,
+};
 use tempfile::{NamedTempFile, TempPath};
-
-use crate::errors::IoResultExt;
-use crate::Builder;
 
 /// Create a new temporary file.
 ///

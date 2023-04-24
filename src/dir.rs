@@ -1,16 +1,14 @@
 // Copyright (c) The camino-tempfile Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
+use crate::Builder;
+use camino::{Utf8Path, Utf8PathBuf};
 use std::{
     convert::{TryFrom, TryInto},
     fmt, io,
     path::Path,
 };
-
-use camino::{Utf8Path, Utf8PathBuf};
 use tempfile::TempDir;
-
-use crate::Builder;
 
 /// Create a new temporary directory.
 ///

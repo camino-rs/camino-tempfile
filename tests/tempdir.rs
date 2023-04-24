@@ -10,14 +10,9 @@
 
 #![deny(rust_2018_idioms)]
 
-use std::env;
-use std::fs;
-use std::path::Path;
-use std::sync::mpsc::channel;
-use std::thread;
-
 use camino::Utf8Path;
 use camino_tempfile::{Builder, Utf8TempDir};
+use std::{env, fs, path::Path, sync::mpsc::channel, thread};
 
 macro_rules! t {
     ($e:expr) => {

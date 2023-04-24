@@ -1,7 +1,9 @@
 #![deny(rust_2018_idioms)]
 
-use std::fs;
-use std::io::{Read, Seek, SeekFrom, Write};
+use std::{
+    fs,
+    io::{Read, Seek, SeekFrom, Write},
+};
 #[cfg(target_os = "linux")]
 use std::{
     sync::mpsc::{sync_channel, TryRecvError},

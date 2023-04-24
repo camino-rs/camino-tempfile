@@ -1,11 +1,9 @@
 // Copyright (c) The camino-tempfile Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-use std::{convert::TryFrom, io};
-
-use camino::{Utf8Path, Utf8PathBuf};
-
 use crate::{helpers::utf8_env_temp_dir, NamedUtf8TempFile, Utf8TempDir};
+use camino::{Utf8Path, Utf8PathBuf};
+use std::{convert::TryFrom, io};
 
 /// Create a new temporary file or directory with custom parameters.
 #[derive(Debug, Clone, Eq, PartialEq)]
