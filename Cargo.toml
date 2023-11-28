@@ -13,10 +13,10 @@ categories = ["filesystem", "os"]
 
 [dependencies]
 camino = "1.1.4"
-tempfile = "3.5.0"
+tempfile = "3.8.1"
 
 [dev-dependencies]
-fastrand = "1.6.0"
+fastrand = "2.0.1"
 
 [features]
 nightly = ["tempfile/nightly"]

@@ -240,6 +240,65 @@ impl Utf8TempDir {
         Builder::new().tempdir_in(dir)
     }
 
+    /// Attempts to make a temporary directory with the specified prefix inside of
+    /// `env::temp_dir()`. The directory and everything inside it will be automatically
+    /// deleted once the returned `TempDir` is destroyed.
+    ///
+    /// # Errors
+    ///
+    /// If the directory can not be created, `Err` is returned.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::fs::{self, File};
+    /// use std::io::Write;
+    /// use camino_tempfile::Utf8TempDir;
+    ///
+    /// # use std::io;
+    /// # fn run() -> Result<(), io::Error> {
+    /// // Create a directory inside of the current directory
+    /// let tmp_dir = Utf8TempDir::with_prefix("foo-")?;
+    /// let tmp_name = tmp_dir.path().file_name().unwrap();
+    /// assert!(tmp_name.starts_with("foo-"));
+    /// # Ok(())
+    /// # }
+    /// ```
+    pub fn with_prefix<S: AsRef<str>>(prefix: S) -> io::Result<Utf8TempDir> {
+        Builder::new().prefix(&prefix).tempdir()
+    }
+
+    /// Attempts to make a temporary directory with the specified prefix inside
+    /// the specified directory. The directory and everything inside it will be
+    /// automatically deleted once the returned `TempDir` is destroyed.
+    ///
+    /// # Errors
+    ///
+    /// If the directory can not be created, `Err` is returned.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::fs::{self, File};
+    /// use std::io::Write;
+    /// use camino_tempfile::Utf8TempDir;
+    ///
+    /// # use std::io;
+    /// # fn run() -> Result<(), io::Error> {
+    /// // Create a directory inside of the current directory
+    /// let tmp_dir = Utf8TempDir::with_prefix_in("foo-", ".")?;
+    /// let tmp_name = tmp_dir.path().file_name().unwrap();
+    /// assert!(tmp_name.starts_with("foo-"));
+    /// # Ok(())
+    /// # }
+    /// ```
+    pub fn with_prefix_in<S: AsRef<str>, P: AsRef<Utf8Path>>(
+        prefix: S,
+        dir: P,
+    ) -> io::Result<Utf8TempDir> {
+        Builder::new().prefix(&prefix).tempdir_in(dir)
+    }
+
     /// Accesses the [`Utf8Path`] to the temporary directory.
     ///
     /// # Examples

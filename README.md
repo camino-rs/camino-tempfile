@@ -6,7 +6,6 @@
 [![License](https://img.shields.io/badge/license-Apache-green.svg)](LICENSE-APACHE)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE-MIT)
 
-
 A secure, cross-platform, temporary file library for Rust with UTF-8 paths.
 
 This crate is a wrapper around [`tempfile`](https://crates.io/crates/tempfile) that works with the `Utf8Path` and `Utf8PathBuf` types defined by [`camino`](https://crates.io/crates/camino). If your code mostly uses `camino`, it can be annoying to have to convert temporary paths to

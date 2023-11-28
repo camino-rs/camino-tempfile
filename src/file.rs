@@ -584,6 +584,34 @@ impl NamedUtf8TempFile<File> {
     pub fn new_in<P: AsRef<Utf8Path>>(dir: P) -> io::Result<NamedUtf8TempFile> {
         Builder::new().tempfile_in(dir)
     }
+
+    /// Create a new named temporary file with the specified filename prefix.
+    ///
+    /// See [`NamedTempFile::new()`] for details.
+    ///
+    /// [`NamedTempFile::new()`]: #method.new
+    pub fn with_prefix<S: AsRef<str>>(prefix: S) -> io::Result<NamedUtf8TempFile> {
+        Builder::new().prefix(&prefix).tempfile()
+    }
+
+    /// Create a new named temporary file with the specified filename prefix,
+    /// in the specified directory.
+    ///
+    /// This is equivalent to:
+    ///
+    /// ```ignore
+    /// Builder::new().prefix(&prefix).tempfile_in(directory)
+    /// ```
+    ///
+    /// See [`NamedTempFile::new()`] for details.
+    ///
+    /// [`NamedTempFile::new()`]: #method.new
+    pub fn with_prefix_in<S: AsRef<str>, P: AsRef<Utf8Path>>(
+        prefix: S,
+        dir: P,
+    ) -> io::Result<NamedUtf8TempFile> {
+        Builder::new().prefix(&prefix).tempfile_in(dir)
+    }
 }
 
 impl<F> NamedUtf8TempFile<F> {
