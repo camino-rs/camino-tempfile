@@ -2,7 +2,7 @@
 name = "camino-tempfile"
 version = "1.0.3"
 edition = "2018"
-rust-version = "1.48"
+rust-version = "1.63"
 license = "MIT OR Apache-2.0"
 description = "A library for managing temporary files and directories, with UTF-8 paths."
 readme = "README.md"
