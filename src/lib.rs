@@ -3,14 +3,14 @@
 
 //! Temporary files and directories with UTF-8 paths.
 //!
-//! `camino-tempfile` is a wrapper around the [`tempfile`](::tempfile) crate that returns
+//! `camino-tempfile` is a wrapper around the [`tempfile`](mod@::tempfile) crate that returns
 //! [`Utf8Path`](camino::Utf8Path) rather than [`Path`](std::path::Path).
 //!
 //! If your code mostly uses [`camino`], it can be annoying to have to convert temporary paths to
 //! `Utf8Path` over and over again. This crate takes care of that for you.
 //!
-//! This library and its documentation are adapted from the [`tempfile`](::tempfile) crate, and are
-//! used under the MIT and Apache 2.0 licenses.
+//! This library and its documentation are adapted from the [`tempfile`](mod@::tempfile) crate, and
+//! are used under the MIT and Apache 2.0 licenses.
 //!
 //! # Synopsis
 //!
