@@ -11,8 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated MSRV to 1.63 to match the MSRV of tempfile.
 - Updated tempfile dependency to 3.8.1.
+- Updated MSRV to 1.63 to match the MSRV of tempfile.
 
 ## [1.0.3] - 2023-11-27
 
