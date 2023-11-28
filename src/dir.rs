@@ -242,7 +242,7 @@ impl Utf8TempDir {
 
     /// Attempts to make a temporary directory with the specified prefix inside of
     /// `env::temp_dir()`. The directory and everything inside it will be automatically
-    /// deleted once the returned `TempDir` is destroyed.
+    /// deleted once the returned `Utf8TempDir` is destroyed.
     ///
     /// # Errors
     ///
@@ -270,7 +270,7 @@ impl Utf8TempDir {
 
     /// Attempts to make a temporary directory with the specified prefix inside
     /// the specified directory. The directory and everything inside it will be
-    /// automatically deleted once the returned `TempDir` is destroyed.
+    /// automatically deleted once the returned `Utf8TempDir` is destroyed.
     ///
     /// # Errors
     ///

@@ -587,9 +587,7 @@ impl NamedUtf8TempFile<File> {
 
     /// Create a new named temporary file with the specified filename prefix.
     ///
-    /// See [`NamedTempFile::new()`] for details.
-    ///
-    /// [`NamedTempFile::new()`]: #method.new
+    /// See [`NamedUtf8TempFile::new()`] for details.
     pub fn with_prefix<S: AsRef<str>>(prefix: S) -> io::Result<NamedUtf8TempFile> {
         Builder::new().prefix(&prefix).tempfile()
     }
@@ -603,9 +601,7 @@ impl NamedUtf8TempFile<File> {
     /// Builder::new().prefix(&prefix).tempfile_in(directory)
     /// ```
     ///
-    /// See [`NamedTempFile::new()`] for details.
-    ///
-    /// [`NamedTempFile::new()`]: #method.new
+    /// See [`NamedUtf8TempFile::new()`] for details.
     pub fn with_prefix_in<S: AsRef<str>, P: AsRef<Utf8Path>>(
         prefix: S,
         dir: P,
