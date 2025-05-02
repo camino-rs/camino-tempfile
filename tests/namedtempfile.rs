@@ -391,53 +391,31 @@ fn test_make_uds() {
 #[cfg(unix)]
 #[test]
 fn test_make_uds_conflict() {
-    use std::{
-        os::unix::net::UnixListener,
-        sync::{
-            atomic::{AtomicUsize, Ordering},
-            Arc,
-        },
-    };
+    use std::{io::ErrorKind, os::unix::net::UnixListener};
 
-    // Check that retries happen correctly by racing N different threads.
+    let sockets = std::iter::repeat_with(|| {
+        Builder::new()
+            .prefix("tmp")
+            .suffix(".sock")
+            .rand_bytes(1)
+            .make(|path| UnixListener::bind(path))
+    })
+    .take_while(|r| match r {
+        Ok(_) => true,
+        Err(e) if matches!(e.kind(), ErrorKind::AddrInUse | ErrorKind::AlreadyExists) => false,
+        Err(e) => panic!("unexpected error {e}"),
+    })
+    .collect::<Result<Vec<_>, _>>()
+    .unwrap();
 
-    const NTHREADS: usize = 20;
+    // Number of sockets we can create. Depends on whether or not the filesystem is case sensitive.
 
-    // The number of times our callback was called.
-    let tries = Arc::new(AtomicUsize::new(0));
+    #[cfg(target_os = "macos")]
+    const NUM_FILES: usize = 36;
+    #[cfg(not(target_os = "macos"))]
+    const NUM_FILES: usize = 62;
 
-    let mut threads = Vec::with_capacity(NTHREADS);
-
-    for _ in 0..NTHREADS {
-        let tries = tries.clone();
-        threads.push(std::thread::spawn(move || {
-            // Ensure that every thread uses the same seed so we are guaranteed
-            // to retry. Note that fastrand seeds are thread-local.
-            fastrand::seed(42);
-
-            Builder::new()
-                .prefix("tmp")
-                .suffix(".sock")
-                .rand_bytes(12)
-                .make(|path| {
-                    tries.fetch_add(1, Ordering::Relaxed);
-                    UnixListener::bind(path)
-                })
-        }));
-    }
-
-    // Join all threads, but don't drop the temp file yet. Otherwise, we won't
-    // get a deterministic number of `tries`.
-    let sockets: Vec<_> = threads
-        .into_iter()
-        .map(|thread| thread.join().unwrap().unwrap())
-        .collect();
-
-    // Number of tries is exactly equal to (n*(n+1))/2.
-    assert_eq!(
-        tries.load(Ordering::Relaxed),
-        (NTHREADS * (NTHREADS + 1)) / 2
-    );
+    assert_eq!(sockets.len(), NUM_FILES);
 
     for socket in sockets {
         assert!(socket.path().exists());
