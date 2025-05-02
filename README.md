@@ -17,7 +17,7 @@ In addition to creating temporary files, this library also allows users to secur
 
 ## Usage
 
-Minimum required Rust version: 1.63.0
+Minimum required Rust version: 1.65.0
 
 Add this to your Cargo.toml:
 
