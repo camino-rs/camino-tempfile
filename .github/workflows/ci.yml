@@ -37,9 +37,9 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
-        # 1.63 is the MSRV.
+        # 1.65 is the MSRV.
         rust-version:
-          - "1.63"
+          - "1.65"
           - stable
       fail-fast: false
     env:
