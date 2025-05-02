@@ -254,7 +254,7 @@ impl Utf8TempPath {
     /// # Notes
     ///
     /// * This method accepts `AsRef<Path>` rather than `AsRef<Utf8Path>`, because in the success
-    /// case it does not return anything.
+    ///   case it does not return anything.
     /// * Temporary files cannot be persisted across filesystems.
     /// * This method is not atomic. It can leave the original link to the temporary file behind.
     ///
@@ -742,7 +742,7 @@ impl<F> NamedUtf8TempFile<F> {
     /// # Notes
     ///
     /// * This method accepts `AsRef<Path>` rather than `AsRef<Utf8Path>` because it returns the
-    /// underlying file type `F`.
+    ///   underlying file type `F`.
     /// * Temporary files cannot be persisted across filesystems.
     /// * This method is not atomic. It can leave the original link to the temporary file behind.
     ///
