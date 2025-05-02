@@ -299,6 +299,59 @@ impl Utf8TempDir {
         Builder::new().prefix(&prefix).tempdir_in(dir)
     }
 
+    /// Attempts to make a temporary directory with the specified suffix inside of
+    /// `env::temp_dir()`. The directory and everything inside it will be automatically
+    /// deleted once the returned `TempDir` is destroyed.
+    ///
+    /// # Errors
+    ///
+    /// If the directory can not be created, `Err` is returned.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::fs::{self, File};
+    /// use std::io::Write;
+    /// use camino_tempfile::Utf8TempDir;
+    ///
+    /// // Create a directory inside of the current directory
+    /// let tmp_dir = Utf8TempDir::with_suffix("-foo")?;
+    /// let tmp_name = tmp_dir.path().file_name().unwrap();
+    /// assert!(tmp_name.ends_with("-foo"));
+    /// # Ok::<(), std::io::Error>(())
+    /// ```
+    pub fn with_suffix<S: AsRef<str>>(suffix: S) -> io::Result<Utf8TempDir> {
+        Builder::new().suffix(&suffix).tempdir()
+    }
+
+    /// Attempts to make a temporary directory with the specified suffix inside
+    /// the specified directory. The directory and everything inside it will be
+    /// automatically deleted once the returned `TempDir` is destroyed.
+    ///
+    /// # Errors
+    ///
+    /// If the directory can not be created, `Err` is returned.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::fs::{self, File};
+    /// use std::io::Write;
+    /// use camino_tempfile::Utf8TempDir;
+    ///
+    /// // Create a directory inside of the current directory
+    /// let tmp_dir = Utf8TempDir::with_suffix_in("-foo", ".")?;
+    /// let tmp_name = tmp_dir.path().file_name().unwrap();
+    /// assert!(tmp_name.ends_with("-foo"));
+    /// # Ok::<(), std::io::Error>(())
+    /// ```
+    pub fn with_suffix_in<S: AsRef<str>, P: AsRef<Utf8Path>>(
+        suffix: S,
+        dir: P,
+    ) -> io::Result<Utf8TempDir> {
+        Builder::new().suffix(&suffix).tempdir_in(dir)
+    }
+
     /// Accesses the [`Utf8Path`] to the temporary directory.
     ///
     /// # Examples
