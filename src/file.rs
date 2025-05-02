@@ -608,6 +608,30 @@ impl NamedUtf8TempFile<File> {
     ) -> io::Result<NamedUtf8TempFile> {
         Builder::new().prefix(&prefix).tempfile_in(dir)
     }
+
+    /// Create a new named temporary file with the specified filename suffix.
+    ///
+    /// See [`NamedUtf8TempFile::new()`] for details.
+    pub fn with_suffix<S: AsRef<str>>(suffix: S) -> io::Result<NamedUtf8TempFile> {
+        Builder::new().suffix(&suffix).tempfile()
+    }
+
+    /// Create a new named temporary file with the specified filename suffix,
+    /// in the specified directory.
+    ///
+    /// This is equivalent to:
+    ///
+    /// ```ignore
+    /// Builder::new().suffix(&suffix).tempfile_in(directory)
+    /// ```
+    ///
+    /// See [`NamedUtf8TempFile::new()`] for details.
+    pub fn with_suffix_in<S: AsRef<str>, P: AsRef<Utf8Path>>(
+        suffix: S,
+        dir: P,
+    ) -> io::Result<NamedUtf8TempFile> {
+        Builder::new().suffix(&suffix).tempfile_in(dir)
+    }
 }
 
 impl<F> NamedUtf8TempFile<F> {
