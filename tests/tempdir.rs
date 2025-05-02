@@ -23,20 +23,6 @@ macro_rules! t {
     };
 }
 
-trait Utf8PathExt {
-    fn exists(&self) -> bool;
-    fn is_dir(&self) -> bool;
-}
-
-impl Utf8PathExt for Utf8Path {
-    fn exists(&self) -> bool {
-        fs::metadata(self).is_ok()
-    }
-    fn is_dir(&self) -> bool {
-        fs::metadata(self).map(|m| m.is_dir()).unwrap_or(false)
-    }
-}
-
 fn test_tempdir() {
     let path = {
         let p = t!(Builder::new()
