@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- References to the new [`camino-tempfile-ext`](https://crates.io/crates/camino-tempfile-ext) crate, which contains quality-of-life extensions that make it easier to write temporary files. Be sure to check it out!
+- References to the new [`camino-tempfile-ext`](https://crates.io/crates/camino-tempfile-ext) crate, which contains quality-of-life extensions that make it easier to write and assert temporary files. Be sure to check it out!
 
 ### Changed
 
-- MSRV updated to Rust 1.74.
+- MSRV updated to Rust 1.74 to support camino-tempfile-ext (sorry about the quickfire double-bump).
 
 ## [1.2.0] - 2025-05-02
 
