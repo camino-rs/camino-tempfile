@@ -20,7 +20,7 @@ jobs:
         env:
           RUSTC_BOOTSTRAP: 1
           RUSTDOCFLAGS: -Dwarnings --cfg=doc_cfg
-        run: just rustdoc --workspace
+        run: just rustdoc
       - name: Organize
         run: |
           rm -rf target/gh-pages
