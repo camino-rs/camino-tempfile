@@ -8,7 +8,7 @@ on:
 
 jobs:
   camino-tempfile-release:
-    if: github.repository_owner == 'camino-rs' && startsWith(github.ref_name, 'camino-tempfile-')
+    if: github.repository_owner == 'camino-rs' && startsWith(github.ref_name, 'camino-tempfile-1')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
