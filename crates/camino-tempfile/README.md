@@ -17,8 +17,6 @@ In addition to creating temporary files, this library also allows users to secur
 
 ## Usage
 
-Minimum required Rust version: 1.65.0
-
 Add this to your Cargo.toml:
 
 ```toml
@@ -46,6 +44,10 @@ fn main() {
     assert_eq!("Hello World!", buf);
 }
 ```
+
+## Minimum supported Rust version (MSRV)
+
+camino-tempfile's MSRV is Rust 1.65. At any time, at least the last 6 months of Rust releases will be supported.
 
 ## License
 
