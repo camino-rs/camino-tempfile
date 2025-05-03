@@ -30,6 +30,8 @@ jobs:
           tool: just,cargo-hack,cargo-sync-rdme
       - name: Lint (clippy)
         run: just powerset clippy --all-targets
+      - name: Lint (rustfmt)
+        run: cargo xfmt
       - name: Run rustdoc
         run: just rustdoc
       - name: Install nightly toolchain for cargo-sync-rdme
