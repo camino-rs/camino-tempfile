@@ -47,7 +47,7 @@ fn main() {
 
 ## Minimum supported Rust version (MSRV)
 
-camino-tempfile's MSRV is Rust 1.65. At any time, at least the last 6 months of Rust releases will be supported.
+camino-tempfile's MSRV is Rust 1.74. At any time, at least the last 6 months of Rust releases will be supported.
 
 ## License
 
