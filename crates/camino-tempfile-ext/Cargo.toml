@@ -24,9 +24,5 @@ predicates-tree.workspace = true
 color = ["dep:anstream", "dep:anstyle", "predicates/color"]
 default = ["color"]
 
-[package.metadata.cargo-sync-rdme.badge.badges]
-crates-io = true
-rust-version = true
-
 [package.metadata.cargo-sync-rdme.rustdoc]
 html-root-url = "https://camino-rs.github.io/camino-tempfile"

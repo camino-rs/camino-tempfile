@@ -33,6 +33,11 @@
 //! # Features
 //!
 //! - **color**: Enable colored output for assertions. *Enabled by default*.
+//! 
+//! # Minimum supported Rust version (MSRV)
+//! 
+//! camino-tempfile-ext's MSRV is **Rust 1.74**. At any time, at least the last
+//! 6 months of Rust releases will be supported.
 //!
 //! # Credits
 //!

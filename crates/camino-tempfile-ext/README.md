@@ -1,10 +1,7 @@
 <!-- cargo-sync-rdme title [[ -->
 # camino-tempfile-ext
 <!-- cargo-sync-rdme ]] -->
-<!-- cargo-sync-rdme badge [[ -->
 [![crates.io](https://img.shields.io/crates/v/camino-tempfile-ext.svg?logo=rust)](https://crates.io/crates/camino-tempfile-ext)
-[![Rust: ^1.74.0](https://img.shields.io/badge/rust-^1.74.0-93450a.svg?logo=rust)](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field)
-<!-- cargo-sync-rdme ]] -->
 [![Documentation (latest release)](https://img.shields.io/badge/docs-latest%20version-brightgreen.svg)](https://docs.rs/camino-tempfile)
 [![Documentation (main)](https://img.shields.io/badge/docs-main-purple.svg)](https://camino-rs.github.io/camino-tempfile/rustdoc/camino_tempfile/)
 [![License (Apache 2.0)](https://img.shields.io/badge/license-Apache-green.svg)](LICENSE-APACHE)
@@ -40,6 +37,11 @@ file.assert("Hello, world!");
 ## Features
 
 * **color**: Enable colored output for assertions. *Enabled by default*.
+
+## Minimum supported Rust version (MSRV)
+
+camino-tempfile-ext’s MSRV is **Rust 1.74**. At any time, at least the last
+6 months of Rust releases will be supported.
 
 ## Credits
 
