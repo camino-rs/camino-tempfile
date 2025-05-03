@@ -7,23 +7,52 @@ on:
       - '*'
 
 jobs:
-  create-release:
-    if: github.repository_owner == 'camino-rs'
+  camino-tempfile-release:
+    if: github.repository_owner == 'camino-rs' && startsWith(github.ref_name, 'camino-tempfile-')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
-      - run: cargo publish
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      - name: Install cargo release
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-release@0.25.17,just
       - uses: taiki-e/create-gh-release-action@v1
         with:
-          changelog: CHANGELOG.md
-          title: camino-tempfile $version
+          changelog: crates/camino-tempfile/CHANGELOG.md
+          title: $prefix $version
           branch: main
           prefix: camino-tempfile
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: just ci-cargo-release camino-tempfile
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+  camino-tempfile-ext-release:
+    if: github.repository_owner == 'camino-rs' && startsWith(github.ref_name, 'camino-tempfile-ext-')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install cargo release
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-release@0.25.17,just
+      - uses: taiki-e/create-gh-release-action@v1
+        with:
+          changelog: crates/camino-tempfile-ext/CHANGELOG.md
+          title: $prefix $version
+          branch: main
+          prefix: camino-tempfile-ext
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: just ci-cargo-release camino-tempfile-ext
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}

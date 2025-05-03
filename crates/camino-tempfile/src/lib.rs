@@ -1,6 +1,10 @@
 // Copyright (c) The camino-tempfile Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
+// Setting html_root_url allows links from camino-tempfile-ext to work. This
+// line is updated by cargo-release.
+#![doc(html_root_url = "https://docs.rs/camino-tempfile/1.2.0")]
+
 //! Temporary files and directories with UTF-8 paths.
 //!
 //! `camino-tempfile` is a wrapper around the [`tempfile`](mod@::tempfile) crate that returns
@@ -11,6 +15,10 @@
 //!
 //! This library and its documentation are adapted from the [`tempfile`](mod@::tempfile) crate, and
 //! are used under the MIT and Apache 2.0 licenses.
+//!
+//! This crate closely mirrors tempfile's interface. For extensions that provide
+//! quality-of-life improvements such as the ability to create files easily, see
+//! [`camino-tempfile-ext`](https://crates.io/crates/camino-tempfile-ext).
 //!
 //! # Synopsis
 //!

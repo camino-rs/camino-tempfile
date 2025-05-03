@@ -1,2 +1,5 @@
 [alias]
 xfmt = "fmt --all -- --config imports_granularity=Crate --config group_imports=One"
+
+[resolver]
+incompatible-rust-versions = "fallback"

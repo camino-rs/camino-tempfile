@@ -1,3 +1,21 @@
 [workspace]
 resolver = "2"
 members = ["crates/*"]
+
+[workspace.package]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/camino-rs/camino-tempfile"
+rust-version = "1.74"
+
+[workspace.dependencies]
+anstream = "0.6.18"
+anstyle = "1.0.10"
+camino = "1.1.4"
+camino-tempfile = { path = "crates/camino-tempfile", version = "1.2.0" }
+fastrand = "2.0.1"
+globwalk = "0.9.1"
+predicates = "3.1.0"
+predicates-core = "1.0.6"
+predicates-tree = "1.0.12"
+tempfile = "3.8.1"
