@@ -5,6 +5,18 @@ on:
 
 name: Docs
 
+# Sets permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build-docs:
     name: Build and deploy documentation
@@ -13,7 +25,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2
+      # Note: caching doesn't appear to work for rustdoc as of 2022-12-04, and we're exceeding cache
+      # sizes anyway
       - name: Install just
         uses: taiki-e/install-action@just
       - name: Build rustdoc
