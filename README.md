@@ -5,7 +5,7 @@
 
 This repository contains the source code for temporary file and directory management with [camino](https://docs.rs/camino).
 
-* [**camino-tempfile**](crates/camino-tempfile): Temporary files and directories that return [`Utf8Path`] instances; a wrapper around [tempfile].
+* [**camino-tempfile**](crates/camino-tempfile): Temporary files and directories that return [`Utf8Path`] instances; a wrapper around [`tempfile`].
 * [**camino-tempfile-ext**](crates/camino-tempfile-ext): Quality-of-life extensions for camino-tempfile: easily create and assert on contents within tests and elsewhere.
 
 For more about these crates, see the above links.
