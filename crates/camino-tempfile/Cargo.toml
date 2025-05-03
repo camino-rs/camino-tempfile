@@ -3,20 +3,28 @@ name = "camino-tempfile"
 version = "1.2.0"
 edition = "2021"
 rust-version = "1.74"
-license = "MIT OR Apache-2.0"
+license.workspace = true
 description = "A library for managing temporary files and directories, with UTF-8 paths."
 readme = "README.md"
-repository = "https://github.com/camino-rs/camino-tempfile"
+repository.workspace = true
 documentation = "https://docs.rs/camino-tempfile"
 keywords = ["tempfile", "tmpfile", "filesystem", "camino"]
 categories = ["filesystem", "os"]
 
 [dependencies]
-camino = "1.1.4"
-tempfile = "3.8.1"
+camino.workspace = true
+tempfile.workspace = true
 
 [dev-dependencies]
-fastrand = "2.0.1"
+fastrand.workspace = true
 
 [features]
 nightly = ["tempfile/nightly"]
+
+[package.metadata.release]
+pre-release-replacements = [
+    { file = "src/lib.rs", search = "^#!\\[doc\\(html_root_url = \"https://docs.rs/camino-tempfile/.*\"\\)\\]$", replace = "#![doc(html_root_url = \"https://docs.rs/camino-tempfile/{{version}}\")]", exactly = 1 },
+]
+
+[package.metadata.cargo-sync-rdme.rustdoc]
+html-root-url = "https://camino-rs.github.io/camino-tempfile"

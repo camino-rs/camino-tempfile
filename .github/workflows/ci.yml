@@ -24,10 +24,18 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
+      - name: Install just, cargo-hack, and cargo-sync-rdme
+        uses: taiki-e/install-action@v2
+        with:
+          tool: just,cargo-hack,cargo-sync-rdme
       - name: Lint (clippy)
-        run: cargo clippy --workspace --all-features --all-targets
-      - name: Lint (rustfmt)
-        run: cargo xfmt --check
+        run: just powerset clippy --all-targets
+      - name: Run rustdoc
+        run: just rustdoc
+      - name: Install nightly toolchain for cargo-sync-rdme
+        uses: dtolnay/rust-toolchain@nightly
+      - name: Regenerate readmes
+        run: just generate-readmes
       - name: Check for differences
         run: git diff --exit-code
 
@@ -52,7 +60,12 @@ jobs:
       - uses: dtolnay/rust-toolchain@v1
         with:
           toolchain: ${{ matrix.rust-version }}
-      - name: Build the library
-        run: cargo build
-      - name: Test
-        run: cargo test
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: just,cargo-hack,nextest
+      - name: Build
+        run: just powerset build
+      - name: Run tests
+        run: just powerset nextest run
+      - name: Doctests
+        run: just powerset test --doc

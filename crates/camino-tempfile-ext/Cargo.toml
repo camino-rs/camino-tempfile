@@ -1,0 +1,34 @@
+[package]
+name = "camino-tempfile-ext"
+version = "0.1.0"
+rust-version = "1.74"
+edition.workspace = true
+license.workspace = true
+description = "Quality-of-life extensions for camino-tempfile"
+readme = "README.md"
+repository.workspace = true
+keywords = ["tempfile", "tmpfile", "filesystem", "camino"]
+categories = ["filesystem", "os"]
+
+[dependencies]
+anstream = { workspace = true, optional = true }
+anstyle = { workspace = true, optional = true }
+camino.workspace = true
+camino-tempfile.workspace = true
+globwalk.workspace = true
+predicates.workspace = true
+predicates-core.workspace = true
+predicates-tree.workspace = true
+
+[features]
+color = ["dep:anstream", "dep:anstyle", "predicates/color"]
+default = ["color"]
+
+[package.metadata.cargo-sync-rdme.badge.badges]
+license = true
+crates-io = true
+docs-rs = true
+rust-version = true
+
+[package.metadata.cargo-sync-rdme.rustdoc]
+html-root-url = "https://camino-rs.github.io/camino-tempfile"

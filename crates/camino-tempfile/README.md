@@ -13,6 +13,8 @@ This crate is a wrapper around [`tempfile`](https://crates.io/crates/tempfile) t
 
 In addition to creating temporary files, this library also allows users to securely open multiple independent references to the same temporary file (useful for consumer/producer patterns and surprisingly difficult to implement securely).
 
+This crate closely mirrors tempfile's interface. For extensions that provide quality-of-life improvements such as the ability to create files easily, see [`camino-tempfile-ext`](https://crates.io/crates/camino-tempfile-ext).
+
 [Documentation](https://docs.rs/camino-tempfile)
 
 ## Usage
