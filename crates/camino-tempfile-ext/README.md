@@ -2,8 +2,8 @@
 # camino-tempfile-ext
 <!-- cargo-sync-rdme ]] -->
 [![crates.io](https://img.shields.io/crates/v/camino-tempfile-ext.svg?logo=rust)](https://crates.io/crates/camino-tempfile-ext)
-[![Documentation (latest release)](https://img.shields.io/badge/docs-latest%20version-brightgreen.svg)](https://docs.rs/camino-tempfile)
-[![Documentation (main)](https://img.shields.io/badge/docs-main-purple.svg)](https://camino-rs.github.io/camino-tempfile/rustdoc/camino_tempfile/)
+[![Documentation (latest release)](https://img.shields.io/badge/docs-latest%20version-brightgreen.svg)](https://docs.rs/camino-tempfile-ext)
+[![Documentation (main)](https://img.shields.io/badge/docs-main-purple.svg)](https://camino-rs.github.io/camino-tempfile/rustdoc/camino_tempfile_ext/)
 [![License (Apache 2.0)](https://img.shields.io/badge/license-Apache-green.svg)](LICENSE-APACHE)
 [![License (MIT)](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE-MIT)
 <!-- cargo-sync-rdme rustdoc [[ -->
