@@ -25,9 +25,7 @@ color = ["dep:anstream", "dep:anstyle", "predicates/color"]
 default = ["color"]
 
 [package.metadata.cargo-sync-rdme.badge.badges]
-license = true
 crates-io = true
-docs-rs = true
 rust-version = true
 
 [package.metadata.cargo-sync-rdme.rustdoc]

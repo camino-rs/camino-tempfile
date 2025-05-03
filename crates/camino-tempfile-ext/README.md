@@ -2,11 +2,13 @@
 # camino-tempfile-ext
 <!-- cargo-sync-rdme ]] -->
 <!-- cargo-sync-rdme badge [[ -->
-![License: MIT OR Apache-2.0](https://img.shields.io/crates/l/camino-tempfile-ext.svg?)
 [![crates.io](https://img.shields.io/crates/v/camino-tempfile-ext.svg?logo=rust)](https://crates.io/crates/camino-tempfile-ext)
-[![docs.rs](https://img.shields.io/docsrs/camino-tempfile-ext.svg?logo=docs.rs)](https://docs.rs/camino-tempfile-ext)
 [![Rust: ^1.74.0](https://img.shields.io/badge/rust-^1.74.0-93450a.svg?logo=rust)](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field)
 <!-- cargo-sync-rdme ]] -->
+[![Documentation (latest release)](https://img.shields.io/badge/docs-latest%20version-brightgreen.svg)](https://docs.rs/camino-tempfile)
+[![Documentation (main)](https://img.shields.io/badge/docs-main-purple.svg)](https://camino-rs.github.io/camino-tempfile/rustdoc/camino_tempfile/)
+[![License (Apache 2.0)](https://img.shields.io/badge/license-Apache-green.svg)](LICENSE-APACHE)
+[![License (MIT)](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE-MIT)
 <!-- cargo-sync-rdme rustdoc [[ -->
 Quality-of-life extensions for [`camino-tempfile`].
 
