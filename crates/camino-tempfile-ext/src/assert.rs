@@ -139,7 +139,7 @@ impl PathAssert for fixture::ChildPath {
         I: IntoUtf8PathPredicate<P>,
         P: Predicate<Utf8Path>,
     {
-        assert(self.path(), pred);
+        assert(self.as_path(), pred);
         self
     }
 }

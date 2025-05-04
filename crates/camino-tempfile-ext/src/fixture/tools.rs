@@ -28,7 +28,7 @@ pub trait PathCreateDir {
 
 impl PathCreateDir for ChildPath {
     fn create_dir_all(&self) -> Result<(), FixtureError> {
-        create_dir_all(self.path())
+        create_dir_all(self.as_path())
     }
 }
 
@@ -52,7 +52,7 @@ pub trait FileTouch {
 
 impl FileTouch for ChildPath {
     fn touch(&self) -> Result<(), FixtureError> {
-        touch(self.path())
+        touch(self.as_path())
     }
 }
 
@@ -85,7 +85,7 @@ pub trait FileWriteBin {
 
 impl FileWriteBin for ChildPath {
     fn write_binary(&self, data: &[u8]) -> Result<(), FixtureError> {
-        write_binary(self.path(), data)
+        write_binary(self.as_path(), data)
     }
 }
 
@@ -116,7 +116,7 @@ pub trait FileWriteStr {
 
 impl FileWriteStr for ChildPath {
     fn write_str(&self, data: &str) -> Result<(), FixtureError> {
-        write_str(self.path(), data)
+        write_str(self.as_path(), data)
     }
 }
 
@@ -149,7 +149,7 @@ pub trait FileWriteFile {
 
 impl FileWriteFile for ChildPath {
     fn write_file(&self, data: &Utf8Path) -> Result<(), FixtureError> {
-        write_file(self.path(), data)
+        write_file(self.as_path(), data)
     }
 }
 
@@ -196,7 +196,7 @@ impl PathCopy for ChildPath {
         source: P,
         patterns: &[S],
     ) -> Result<(), FixtureError> {
-        copy_files(self.path(), source.as_ref(), patterns)
+        copy_files(self.as_path(), source.as_ref(), patterns)
     }
 }
 
@@ -214,7 +214,7 @@ pub trait SymlinkToFile {
     /// let real_file = temp.child("real_file");
     /// real_file.touch().unwrap();
     ///
-    /// temp.child("link_file").symlink_to_file(real_file.path()).unwrap();
+    /// temp.child("link_file").symlink_to_file(real_file.as_path()).unwrap();
     ///
     /// temp.close().unwrap();
     /// ```
@@ -223,7 +223,7 @@ pub trait SymlinkToFile {
 
 impl SymlinkToFile for ChildPath {
     fn symlink_to_file<P: AsRef<Path>>(&self, target: P) -> Result<(), FixtureError> {
-        symlink_to_file(self.path(), target.as_ref())
+        symlink_to_file(self.as_path(), target.as_ref())
     }
 }
 
@@ -246,7 +246,7 @@ pub trait SymlinkToDir {
     /// let real_dir = temp.child("real_dir");
     /// real_dir.create_dir_all().unwrap();
     ///
-    /// temp.child("link_dir").symlink_to_dir(real_dir.path()).unwrap();
+    /// temp.child("link_dir").symlink_to_dir(real_dir.as_path()).unwrap();
     ///
     /// temp.close().unwrap();
     /// ```
@@ -255,7 +255,7 @@ pub trait SymlinkToDir {
 
 impl SymlinkToDir for ChildPath {
     fn symlink_to_dir<P: AsRef<Path>>(&self, target: P) -> Result<(), FixtureError> {
-        symlink_to_dir(self.path(), target.as_ref())
+        symlink_to_dir(self.as_path(), target.as_ref())
     }
 }
 
@@ -378,6 +378,6 @@ mod tests {
 
         assert!(link.exists());
         assert!(link.is_symlink());
-        assert_eq!(link.read_link_utf8().unwrap().as_path(), file.as_std_path());
+        assert_eq!(link.read_link_utf8().unwrap(), file);
     }
 }
