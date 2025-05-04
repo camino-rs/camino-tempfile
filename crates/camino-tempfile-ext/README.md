@@ -30,13 +30,14 @@ let dir = Utf8TempDir::new().unwrap();
 let file = dir.child("foo/bar/baz.txt");
 file.write_str("Hello, world!").unwrap();
 
-// Assert on the file's contents.
+// Assert on the file's contents (requires the assert feature)
 file.assert("Hello, world!");
 ````
 
 ## Features
 
-* **color**: Enable colored output for assertions. *Enabled by default*.
+* **assert**: Enable assertions on file and directory contents. *Not enabled by default.*
+* **assert-color**: Enable colored output for assertions: enables **assert**. *Not enabled by default.*
 
 ## Minimum supported Rust version (MSRV)
 

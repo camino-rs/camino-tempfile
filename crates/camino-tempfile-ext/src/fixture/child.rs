@@ -5,6 +5,7 @@
 
 use camino::{Utf8Path, Utf8PathBuf};
 use camino_tempfile::Utf8TempDir;
+use std::path::Path;
 
 /// Access paths within a [`Utf8TempDir`] for testing.
 ///
@@ -62,7 +63,7 @@ impl PathChild for ChildPath {
 ///
 /// temp.close().unwrap();
 /// ```
-///
+#[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct ChildPath {
     path: Utf8PathBuf,
 }
@@ -84,6 +85,12 @@ impl ChildPath {
 impl AsRef<Utf8Path> for ChildPath {
     fn as_ref(&self) -> &Utf8Path {
         &self.path
+    }
+}
+
+impl AsRef<Path> for ChildPath {
+    fn as_ref(&self) -> &Path {
+        self.path.as_ref()
     }
 }
 

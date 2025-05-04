@@ -362,3 +362,22 @@ fn symlink_to_dir(link: &Utf8Path, target: &Path) -> Result<(), FixtureError> {
     std::os::unix::fs::symlink(target, link).chain(FixtureError::new(FixtureKind::Symlink))?;
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::fixture::PathChild;
+
+    #[test]
+    fn test_symlink_to_file() {
+        let temp_dir = Utf8TempDir::new().unwrap();
+        let file = temp_dir.child("file");
+        file.touch().unwrap();
+        let link = temp_dir.child("link");
+        link.symlink_to_file(&file).unwrap();
+
+        assert!(link.exists());
+        assert!(link.is_symlink());
+        assert_eq!(link.read_link_utf8().unwrap().as_path(), file.as_std_path());
+    }
+}

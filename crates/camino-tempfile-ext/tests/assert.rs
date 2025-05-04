@@ -1,7 +1,9 @@
 // Copyright (c) The camino-tempfile Contributors
-// Adapted from assert_fs
+// Adapted from assert_fs: Copyright (c) The assert_fs Contributors
 //
 // SPDX-License-Identifier: MIT OR Apache-2.0
+
+#![cfg(feature = "assert")]
 
 use camino_tempfile_ext::{fixture::ChildPath, prelude::*};
 use predicates::prelude::*;

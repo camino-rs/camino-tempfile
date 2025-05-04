@@ -22,6 +22,7 @@
 //! file.write_str("Hello, world!").unwrap();
 //!
 //! // Now do something with the file...
+//! # #[cfg(feature = "assert")]
 //! # file.assert("Hello, world!");
 //! ```
 //!

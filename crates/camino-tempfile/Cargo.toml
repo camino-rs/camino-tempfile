@@ -11,6 +11,9 @@ documentation = "https://docs.rs/camino-tempfile"
 keywords = ["tempfile", "tmpfile", "filesystem", "camino"]
 categories = ["filesystem", "os"]
 
+[lints]
+workspace = true
+
 [dependencies]
 camino.workspace = true
 tempfile.workspace = true

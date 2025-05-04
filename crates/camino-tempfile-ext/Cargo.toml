@@ -10,19 +10,22 @@ repository.workspace = true
 keywords = ["tempfile", "tmpfile", "filesystem", "camino"]
 categories = ["filesystem", "os"]
 
+[lints]
+workspace = true
+
 [dependencies]
 anstream = { workspace = true, optional = true }
 anstyle = { workspace = true, optional = true }
 camino.workspace = true
 camino-tempfile.workspace = true
 globwalk.workspace = true
-predicates.workspace = true
-predicates-core.workspace = true
-predicates-tree.workspace = true
+predicates = { workspace = true, optional = true }
+predicates-core = { workspace = true, optional = true }
+predicates-tree = { workspace = true, optional = true }
 
 [features]
-color = ["dep:anstream", "dep:anstyle", "predicates/color"]
-default = ["color"]
+assert = ["dep:predicates", "dep:predicates-core", "dep:predicates-tree"]
+assert-color = ["assert", "dep:anstream", "dep:anstyle", "predicates/color"]
 
 [package.metadata.cargo-sync-rdme.rustdoc]
 html-root-url = "https://camino-rs.github.io/camino-tempfile"
