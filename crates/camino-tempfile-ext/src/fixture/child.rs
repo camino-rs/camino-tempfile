@@ -5,7 +5,10 @@
 
 use camino::{Utf8Path, Utf8PathBuf};
 use camino_tempfile::Utf8TempDir;
-use std::path::Path;
+use std::{
+    borrow::Cow,
+    path::{Path, PathBuf},
+};
 
 /// Access paths within a [`Utf8TempDir`] for testing.
 ///
@@ -29,7 +32,7 @@ pub trait PathChild {
     ///
     /// let temp = Utf8TempDir::new().unwrap();
     /// println!("{}", temp.path());
-    /// println!("{}", temp.child("foo/bar.txt").path());
+    /// println!("{}", temp.child("foo/bar.txt").as_path());
     /// temp.close().unwrap();
     /// ```
     fn child<P: AsRef<Utf8Path>>(&self, path: P) -> ChildPath;
@@ -43,7 +46,7 @@ impl PathChild for Utf8TempDir {
 
 impl PathChild for ChildPath {
     fn child<P: AsRef<Utf8Path>>(&self, path: P) -> ChildPath {
-        ChildPath::new(self.path().join(path.as_ref()))
+        ChildPath::new(self.as_path().join(path.as_ref()))
     }
 }
 
@@ -77,7 +80,8 @@ impl ChildPath {
     }
 
     /// Access the path.
-    pub fn path(&self) -> &Utf8Path {
+    pub fn as_path(&self) -> &Utf8Path {
+        // Note: name is `as_path` to match `Deref` impl's `as_std_path`.
         &self.path
     }
 }
@@ -101,3 +105,49 @@ impl std::ops::Deref for ChildPath {
         &self.path
     }
 }
+
+macro_rules! impl_partial_eq {
+    ($lhs:ty, $rhs: ty) => {
+        impl PartialEq<$rhs> for $lhs {
+            #[inline]
+            fn eq(&self, other: &$rhs) -> bool {
+                <Utf8Path as PartialEq>::eq(self, other)
+            }
+        }
+
+        impl PartialEq<$lhs> for $rhs {
+            #[inline]
+            fn eq(&self, other: &$lhs) -> bool {
+                <Utf8Path as PartialEq>::eq(self, other)
+            }
+        }
+    };
+}
+
+impl_partial_eq!(ChildPath, Utf8Path);
+impl_partial_eq!(ChildPath, &Utf8Path);
+impl_partial_eq!(ChildPath, Utf8PathBuf);
+impl_partial_eq!(ChildPath, Cow<'_, Utf8Path>);
+
+macro_rules! impl_partial_eq_std_path {
+    ($lhs:ty, $rhs: ty) => {
+        impl PartialEq<$rhs> for $lhs {
+            #[inline]
+            fn eq(&self, other: &$rhs) -> bool {
+                <Path as PartialEq>::eq(self.as_ref(), other)
+            }
+        }
+
+        impl PartialEq<$lhs> for $rhs {
+            #[inline]
+            fn eq(&self, other: &$lhs) -> bool {
+                <Path as PartialEq>::eq(self, other.as_ref())
+            }
+        }
+    };
+}
+
+impl_partial_eq_std_path!(ChildPath, Path);
+impl_partial_eq_std_path!(ChildPath, &Path);
+impl_partial_eq_std_path!(ChildPath, PathBuf);
+impl_partial_eq_std_path!(ChildPath, Cow<'_, Path>);
