@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 #![warn(missing_docs)]
+#![cfg_attr(doc_cfg, feature(doc_auto_cfg))]
 
 //! Quality-of-life extensions for [`camino-tempfile`].
 //!
@@ -26,13 +27,15 @@
 //! let file = dir.child("foo/bar/baz.txt");
 //! file.write_str("Hello, world!").unwrap();
 //!
-//! // Assert on the file's contents.
+//! // Assert on the file's contents (requires the assert feature)
+//! # #[cfg(feature = "assert")]
 //! file.assert("Hello, world!");
 //! ```
 //!
 //! # Features
 //!
-//! - **color**: Enable colored output for assertions. *Enabled by default*.
+//! - **assert**: Enable assertions on file and directory contents. *Not enabled by default.*
+//! - **assert-color**: Enable colored output for assertions: enables **assert**. *Not enabled by default.*
 //!
 //! # Minimum supported Rust version (MSRV)
 //!
@@ -52,22 +55,24 @@
 //! [`assert_fs`]: https://crates.io/crates/assert_fs
 //! [`Utf8TempDir`]: camino_tempfile::Utf8TempDir
 
+#[cfg(feature = "assert")]
 pub mod assert;
+#[cfg(feature = "assert")]
 mod color;
 pub mod fixture;
 
 /// Extension traits and types that are useful to have available.
 pub mod prelude {
-    pub use crate::{
-        assert::PathAssert,
-        fixture::{
-            FileTouch, FileWriteBin, FileWriteFile, FileWriteStr, PathChild, PathCopy,
-            PathCreateDir, SymlinkToDir, SymlinkToFile,
-        },
+    #[cfg(feature = "assert")]
+    pub use crate::assert::PathAssert;
+    pub use crate::fixture::{
+        FileTouch, FileWriteBin, FileWriteFile, FileWriteStr, PathChild, PathCopy, PathCreateDir,
+        SymlinkToDir, SymlinkToFile,
     };
     pub use camino_tempfile::{NamedUtf8TempFile, Utf8TempDir};
 }
 
 // Re-exports of public dependencies.
 pub use camino_tempfile;
+#[cfg(feature = "assert")]
 pub use predicates_core;

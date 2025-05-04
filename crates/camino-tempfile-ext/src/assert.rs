@@ -24,8 +24,9 @@
 //!
 //! temp.close().unwrap();
 //! ```
+
 use crate::{color::Palette, fixture};
-#[cfg(feature = "color")]
+#[cfg(feature = "assert-color")]
 use anstream::panic;
 use camino::Utf8Path;
 use camino_tempfile::{NamedUtf8TempFile, Utf8TempDir};

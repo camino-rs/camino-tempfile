@@ -9,7 +9,7 @@ pub(crate) struct Palette {
 }
 
 impl Palette {
-    #[cfg(feature = "color")]
+    #[cfg(feature = "assert-color")]
     pub(crate) fn color() -> Self {
         Self {
             inner: Inner::Color {
@@ -19,7 +19,7 @@ impl Palette {
         }
     }
 
-    #[cfg(not(feature = "color"))]
+    #[cfg(not(feature = "assert-color"))]
     pub(crate) fn color() -> Self {
         Self::default()
     }
@@ -35,7 +35,7 @@ impl Palette {
 
 #[derive(Copy, Clone, Debug, Default)]
 enum Inner {
-    #[cfg(feature = "color")]
+    #[cfg(feature = "assert-color")]
     Color {
         key: anstyle::Style,
         value: anstyle::Style,
@@ -47,7 +47,7 @@ enum Inner {
 impl Inner {
     fn key_style(&self) -> StyledInner {
         match self {
-            #[cfg(feature = "color")]
+            #[cfg(feature = "assert-color")]
             Inner::Color { key, .. } => StyledInner::Color(*key),
             Inner::Plain => StyledInner::Plain,
         }
@@ -55,7 +55,7 @@ impl Inner {
 
     fn value_style(&self) -> StyledInner {
         match self {
-            #[cfg(feature = "color")]
+            #[cfg(feature = "assert-color")]
             Inner::Color { value, .. } => StyledInner::Color(*value),
             Inner::Plain => StyledInner::Plain,
         }
@@ -70,7 +70,7 @@ pub(crate) struct Styled<D> {
 
 #[derive(Debug)]
 enum StyledInner {
-    #[cfg(feature = "color")]
+    #[cfg(feature = "assert-color")]
     Color(anstyle::Style),
     Plain,
 }
@@ -86,7 +86,7 @@ impl<D: std::fmt::Display> std::fmt::Display for Styled<D> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         if f.alternate() {
             match self.inner {
-                #[cfg(feature = "color")]
+                #[cfg(feature = "assert-color")]
                 StyledInner::Color(style) => {
                     write!(f, "{}", style.render())?;
                     self.display.fmt(f)?;
