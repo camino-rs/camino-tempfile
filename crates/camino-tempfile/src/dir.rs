@@ -383,6 +383,13 @@ impl Utf8TempDir {
         self.as_ref()
     }
 
+    /// Deprecated alias for [`Utf8TempDir::keep`].
+    #[must_use]
+    #[deprecated(since = "1.4.0", note = "use Utf8TempDir::keep")]
+    pub fn into_path(self) -> Utf8PathBuf {
+        self.keep()
+    }
+
     /// Persist the temporary directory to disk, returning the [`Utf8PathBuf`] where it is located.
     ///
     /// This consumes the [`Utf8TempDir`] without deleting directory on the filesystem, meaning that
@@ -400,7 +407,7 @@ impl Utf8TempDir {
     ///
     /// // Persist the temporary directory to disk,
     /// // getting the path where it is.
-    /// let tmp_path = tmp_dir.into_path();
+    /// let tmp_path = tmp_dir.keep();
     ///
     /// // Delete the temporary directory ourselves.
     /// fs::remove_dir_all(tmp_path)?;
@@ -408,11 +415,23 @@ impl Utf8TempDir {
     /// # }
     /// ```
     #[must_use]
-    pub fn into_path(self) -> Utf8PathBuf {
+    pub fn keep(self) -> Utf8PathBuf {
         self.inner
-            .into_path()
+            .keep()
             .try_into()
             .expect("invariant: path is valid UTF-8")
+    }
+
+    /// Disable cleanup of the temporary directory. If `disable_cleanup` is
+    /// `true`, the temporary directory will not be deleted when this
+    /// `Utf8TempDir` is dropped. This method is equivalent to calling
+    /// [`Builder::disable_cleanup`] when creating the `Utf8TempDir`.
+    ///
+    /// **NOTE:** this method is primarily useful for testing/debugging. If you
+    /// want to simply turn a temporary directory into a non-temporary
+    /// directory, prefer [`TUtf8empDir::keep`].
+    pub fn disable_cleanup(&mut self, disable_cleanup: bool) {
+        self.inner.disable_cleanup(disable_cleanup);
     }
 
     /// Closes and removes the temporary directory, returning a `Result`.

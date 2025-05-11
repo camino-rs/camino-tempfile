@@ -18,7 +18,7 @@ globwalk = "0.9.1"
 predicates = "3.1.0"
 predicates-core = "1.0.6"
 predicates-tree = "1.0.12"
-tempfile = "3.8.1"
+tempfile = "3.20.0"
 
 [workspace.lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(doc_cfg)'] }

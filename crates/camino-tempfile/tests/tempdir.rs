@@ -82,7 +82,7 @@ fn test_rm_tempdir() {
     let path;
     {
         let tmp = t!(Utf8TempDir::new());
-        path = tmp.into_path();
+        path = tmp.keep();
     }
     assert!(path.exists());
     t!(fs::remove_dir_all(&path));
@@ -125,7 +125,7 @@ fn test_rm_tempdir_close() {
     let path;
     {
         let tmp = t!(Utf8TempDir::new());
-        path = tmp.into_path();
+        path = tmp.keep();
     }
     assert!(path.exists());
     t!(fs::remove_dir_all(&path));
