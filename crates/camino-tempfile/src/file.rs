@@ -347,6 +347,19 @@ impl Utf8TempPath {
         }
     }
 
+    /// Disable cleanup of the temporary file. If `disable_cleanup` is `true`,
+    /// the temporary file will not be deleted when this `Utf8TempPath` is
+    /// dropped. This method is equivalent to calling
+    /// [`Builder::disable_cleanup`] when creating the original `Utf8TempPath`,
+    /// which see for relevant warnings.
+    ///
+    /// **NOTE:** this method is primarily useful for testing/debugging. If you
+    /// want to simply turn a temporary file-path into a non-temporary
+    /// file-path, prefer [`Utf8TempPath::keep`].
+    pub fn disable_cleanup(&mut self, disable_cleanup: bool) {
+        self.inner.disable_cleanup(disable_cleanup);
+    }
+
     /// Create a new `Utf8TempPath` from an existing path. This can be done even if no file exists
     /// at the given path.
     ///
@@ -852,6 +865,19 @@ impl<F> NamedUtf8TempFile<F> {
                 error: error.error,
             }),
         }
+    }
+
+    /// Disable cleanup of the temporary file. If `disable_cleanup` is `true`,
+    /// the temporary file will not be deleted when this `NamedUtf8TempFile` is
+    /// dropped. This method is equivalent to calling
+    /// [`Builder::disable_cleanup`] when creating the original
+    /// `NamedUtf8TempFile`, which see for relevant warnings.
+    ///
+    /// **NOTE:** this method is primarily useful for testing/debugging. If you
+    /// want to simply turn a temporary file into a non-temporary file, prefer
+    /// [`NamedUtf8TempFile::keep`].
+    pub fn disable_cleanup(&mut self, disable_cleanup: bool) {
+        self.inner.disable_cleanup(disable_cleanup);
     }
 
     /// Get a reference to the underlying file.

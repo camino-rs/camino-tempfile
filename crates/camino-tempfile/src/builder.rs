@@ -198,6 +198,113 @@ impl<'a, 'b> Builder<'a, 'b> {
         self
     }
 
+    /// The permissions to create the tempfile or [tempdir](Self::tempdir) with.
+    ///
+    /// # Security
+    ///
+    /// By default, the permissions of tempfiles on Unix are set for it to be
+    /// readable and writable by the owner only, yielding the greatest amount of
+    /// security. As this method allows to widen the permissions, security would
+    /// be reduced in such cases.
+    ///
+    /// # Platform Notes
+    ///
+    /// ## Unix
+    ///
+    /// The actual permission bits set on the tempfile or tempdir will be
+    /// affected by the `umask` applied by the underlying syscall. The actual
+    /// permission bits are calculated via `permissions & !umask`.
+    ///
+    /// Permissions default to `0o600` for tempfiles and `0o777` for tempdirs.
+    /// Note, this doesn't include effects of the current `umask`. For example,
+    /// combined with the standard umask `0o022`, the defaults yield `0o600` for
+    /// tempfiles and `0o755` for tempdirs.
+    ///
+    /// ## Windows and others
+    ///
+    /// This setting is unsupported and trying to set a file or directory
+    /// read-only will return an error.
+    ///
+    /// # Examples
+    ///
+    /// Create a named temporary file that is world-readable.
+    ///
+    /// ```
+    /// # #[cfg(unix)]
+    /// # {
+    /// use camino_tempfile::Builder;
+    /// use std::os::unix::fs::PermissionsExt;
+    ///
+    /// let all_read_write = std::fs::Permissions::from_mode(0o666);
+    /// let tempfile = Builder::new().permissions(all_read_write).tempfile()?;
+    /// let actual_permissions = tempfile.path().metadata()?.permissions();
+    /// assert_ne!(
+    ///     actual_permissions.mode() & !0o170000,
+    ///     0o600,
+    ///     "we get broader permissions than the default despite umask"
+    /// );
+    /// # }
+    /// # Ok::<(), std::io::Error>(())
+    /// ```
+    ///
+    /// Create a named temporary directory that is restricted to the owner.
+    ///
+    /// ```
+    /// # #[cfg(unix)]
+    /// # {
+    /// use camino_tempfile::Builder;
+    /// use std::os::unix::fs::PermissionsExt;
+    ///
+    /// let owner_rwx = std::fs::Permissions::from_mode(0o700);
+    /// let tempdir = Builder::new().permissions(owner_rwx).tempdir()?;
+    /// let actual_permissions = tempdir.path().metadata()?.permissions();
+    /// assert_eq!(
+    ///     actual_permissions.mode() & !0o170000,
+    ///     0o700,
+    ///     "we get the narrow permissions we asked for"
+    /// );
+    /// # }
+    /// # Ok::<(), std::io::Error>(())
+    /// ```
+    pub fn permissions(&mut self, permissions: std::fs::Permissions) -> &mut Self {
+        self.inner.permissions(permissions);
+        self
+    }
+
+    /// Disable cleanup of the file/folder to even when the
+    /// [`NamedUtf8TempFile`]/[`Utf8TempDir`] goes out of scope. Prefer
+    /// [`NamedUtf8TempFile::keep`] and [`Utf8TempDir::keep`] where possible,
+    /// `disable_cleanup` is provided for testing & debugging.
+    ///
+    /// By default, the file/folder is automatically cleaned up in the
+    /// destructor of [`NamedUtf8TempFile`]/[`Utf8TempDir`]. When
+    /// `disable_cleanup` is set to `true`, this behavior is suppressed. If you
+    /// wish to disable cleanup after creating a temporary file/directory, call
+    /// [`NamedUtf8TempFile::disable_cleanup`] or
+    /// [`Utf8TempDir::disable_cleanup`].
+    ///
+    /// # Warnings
+    ///
+    /// On some platforms (for now, only Windows), temporary files are marked
+    /// with a special "temporary file" (`FILE_ATTRIBUTE_TEMPORARY`) attribute.
+    /// Disabling cleanup _will not_ unset this attribute while calling
+    /// [`NamedUtf8TempFile::keep`] will.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use camino_tempfile::Builder;
+    ///
+    /// let named_tempfile = Builder::new()
+    ///     .disable_cleanup(true)
+    ///     .tempfile()?;
+    /// # Ok::<(), std::io::Error>(())
+    /// ```
+    pub fn disable_cleanup(&mut self, disable_cleanup: bool) -> &mut Self {
+        self.inner.disable_cleanup(disable_cleanup);
+        self
+    }
+
     /// Create the named temporary file.
     ///
     /// # Security
