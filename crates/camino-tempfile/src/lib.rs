@@ -3,7 +3,7 @@
 
 // Setting html_root_url allows links from camino-tempfile-ext to work. This
 // line is updated by cargo-release.
-#![doc(html_root_url = "https://docs.rs/camino-tempfile/1.4.0")]
+#![doc(html_root_url = "https://docs.rs/camino-tempfile/1.4.1")]
 
 //! Temporary files and directories with UTF-8 paths.
 //!

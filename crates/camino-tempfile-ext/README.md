@@ -53,8 +53,8 @@ you to the upstream maintainers!). If you need to work with
 
 Upstream code is used under the terms of the MIT and Apache 2.0 licenses.
 
-[`camino-tempfile`]: https://docs.rs/camino-tempfile/1.4.0/camino_tempfile/index.html
-[`Utf8TempDir`]: https://docs.rs/camino-tempfile/1.4.0/camino_tempfile/dir/struct.Utf8TempDir.html
+[`camino-tempfile`]: https://docs.rs/camino-tempfile/1.4.1/camino_tempfile/index.html
+[`Utf8TempDir`]: https://docs.rs/camino-tempfile/1.4.1/camino_tempfile/dir/struct.Utf8TempDir.html
 [`assert_fs`]: https://crates.io/crates/assert_fs
 <!-- cargo-sync-rdme ]] -->
 
