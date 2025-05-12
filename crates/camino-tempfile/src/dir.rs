@@ -429,7 +429,7 @@ impl Utf8TempDir {
     ///
     /// **NOTE:** this method is primarily useful for testing/debugging. If you
     /// want to simply turn a temporary directory into a non-temporary
-    /// directory, prefer [`TUtf8empDir::keep`].
+    /// directory, prefer [`Utf8TempDir::keep`].
     pub fn disable_cleanup(&mut self, disable_cleanup: bool) {
         self.inner.disable_cleanup(disable_cleanup);
     }

@@ -15,7 +15,7 @@ rustdoc *args:
     @cargo tree --depth 1 -e normal --prefix none --workspace --all-features \
         | gawk '{ gsub(" v", "@", $0); printf("%s\n", $1); }' \
         | xargs printf -- '-p %s\n' \
-        | RUSTC_BOOTSTRAP=1 RUSTDOCFLAGS='--cfg=doc_cfg' xargs cargo doc --no-deps --all-features {{args}}
+        | RUSTC_BOOTSTRAP=1 RUSTDOCFLAGS="$RUSTDOCFLAGS --cfg=doc_cfg" xargs cargo doc --no-deps --all-features {{args}}
 
 # Generate README.md files using `cargo-sync-rdme`.
 generate-readmes:
