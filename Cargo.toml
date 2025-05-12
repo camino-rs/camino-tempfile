@@ -12,7 +12,7 @@ rust-version = "1.74"
 anstream = "0.6.18"
 anstyle = "1.0.10"
 camino = "1.1.4"
-camino-tempfile = { path = "crates/camino-tempfile", version = "1.3.0" }
+camino-tempfile = { path = "crates/camino-tempfile", version = "1.4.0" }
 fastrand = "2.0.1"
 globwalk = "0.9.1"
 predicates = "3.1.0"
