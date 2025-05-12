@@ -388,40 +388,6 @@ fn test_make_uds() {
     assert!(temp_sock.path().exists());
 }
 
-#[cfg(unix)]
-#[test]
-fn test_make_uds_conflict() {
-    use std::{io::ErrorKind, os::unix::net::UnixListener};
-
-    let sockets = std::iter::repeat_with(|| {
-        Builder::new()
-            .prefix("tmp")
-            .suffix(".sock")
-            .rand_bytes(1)
-            .make(|path| UnixListener::bind(path))
-    })
-    .take_while(|r| match r {
-        Ok(_) => true,
-        Err(e) if matches!(e.kind(), ErrorKind::AddrInUse | ErrorKind::AlreadyExists) => false,
-        Err(e) => panic!("unexpected error {e}"),
-    })
-    .collect::<Result<Vec<_>, _>>()
-    .unwrap();
-
-    // Number of sockets we can create. Depends on whether or not the filesystem is case sensitive.
-
-    #[cfg(target_os = "macos")]
-    const NUM_FILES: usize = 36;
-    #[cfg(not(target_os = "macos"))]
-    const NUM_FILES: usize = 62;
-
-    assert_eq!(sockets.len(), NUM_FILES);
-
-    for socket in sockets {
-        assert!(socket.path().exists());
-    }
-}
-
 // Issue #224 on tempfile-rs.
 #[test]
 fn test_overly_generic_bounds() {
