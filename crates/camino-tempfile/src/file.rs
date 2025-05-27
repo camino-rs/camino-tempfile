@@ -1,7 +1,7 @@
 // Copyright (c) The camino-tempfile Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-use crate::{errors::IoResultExt, Builder};
+use crate::{Builder, errors::IoResultExt};
 use camino::{Utf8Path, Utf8PathBuf};
 use std::{
     convert::{TryFrom, TryInto},

@@ -1,7 +1,7 @@
 #![deny(rust_2018_idioms)]
 
 use camino::{Utf8Path, Utf8PathBuf};
-use camino_tempfile::{tempdir, Builder, NamedUtf8TempFile, Utf8TempPath};
+use camino_tempfile::{Builder, NamedUtf8TempFile, Utf8TempPath, tempdir};
 use std::{
     env,
     fs::File,
