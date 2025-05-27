@@ -41,9 +41,9 @@ pub enum FixtureKind {
     WriteFile,
     /// Failed when creating a directory.
     CreateDir,
-    /// Failed to cleanup fixture.
+    /// Failed to cleanup a fixture.
     Cleanup,
-    /// Failed to create symlink
+    /// Failed to create a symlink.
     Symlink,
 }
 
@@ -64,16 +64,25 @@ impl fmt::Display for FixtureKind {
 #[derive(Debug)]
 pub struct FixtureError {
     kind: FixtureKind,
-    cause: Option<Box<dyn Error + Send + Sync + 'static>>,
+    source: Option<Box<dyn Error + Send + Sync + 'static>>,
 }
 
 impl FixtureError {
     /// Create a `FixtureError`.
     pub fn new(kind: FixtureKind) -> Self {
-        Self { kind, cause: None }
+        Self { kind, source: None }
     }
 
-    /// Fixture initialization cause.
+    /// Attach a source to the error.
+    pub fn with_source(
+        mut self,
+        source: impl Into<Box<dyn Error + Send + Sync + 'static>>,
+    ) -> Self {
+        self.source = Some(source.into());
+        self
+    }
+
+    /// Return the fixture initialization cause.
     pub fn kind(&self) -> FixtureKind {
         self.kind
     }
@@ -81,36 +90,55 @@ impl FixtureError {
 
 impl Error for FixtureError {
     fn description(&self) -> &str {
-        "Failed to initialize fixture"
+        "failed to initialize fixture"
     }
 
-    fn cause(&self) -> Option<&dyn Error> {
-        self.cause.as_ref().map(|c| {
-            let c: &dyn Error = c.as_ref();
-            c
-        })
+    fn source(&self) -> Option<&(dyn Error + 'static)> {
+        self.source.as_ref().map(|source| &**source as &dyn Error)
     }
 }
 
 impl fmt::Display for FixtureError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self.cause {
-            Some(ref cause) => write!(
-                f,
-                "Failed to initialize fixture: {}\nCause: {}",
-                self.kind, cause
-            ),
-            None => write!(f, "Failed to initialize fixture: {}", self.kind),
-        }
+        write!(f, "failed to initialize fixture: {}", self.kind)
     }
 }
 
 impl ChainError for FixtureError {
-    fn chain<F>(mut self, cause: F) -> Self
+    fn chain<F>(mut self, source: F) -> Self
     where
         F: Error + Send + Sync + 'static,
     {
-        self.cause = Some(Box::new(cause));
+        self.source = Some(Box::new(source));
         self
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use anyhow::anyhow;
+    use std::io;
+
+    #[test]
+    fn error_types_work_with_source() {
+        // std::io::Error
+        let error = FixtureError::new(FixtureKind::WriteFile).with_source(io::Error::other("test"));
+        assert_eq!(error.kind(), FixtureKind::WriteFile);
+        assert_eq!(error.source().unwrap().to_string(), "test");
+
+        // anyhow::Error
+        let error = FixtureError::new(FixtureKind::WriteFile).with_source(anyhow!("test"));
+        assert_eq!(error.kind(), FixtureKind::WriteFile);
+        assert_eq!(error.source().unwrap().to_string(), "test");
+
+        // another FixtureError
+        let error = FixtureError::new(FixtureKind::WriteFile)
+            .with_source(FixtureError::new(FixtureKind::CopyFile));
+        assert_eq!(error.kind(), FixtureKind::WriteFile);
+        assert_eq!(
+            error.source().unwrap().to_string(),
+            "failed to initialize fixture: error copying file"
+        );
     }
 }

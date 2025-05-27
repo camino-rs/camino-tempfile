@@ -23,6 +23,9 @@ predicates = { workspace = true, optional = true }
 predicates-core = { workspace = true, optional = true }
 predicates-tree = { workspace = true, optional = true }
 
+[dev-dependencies]
+anyhow.workspace = true
+
 [features]
 assert = ["dep:predicates", "dep:predicates-core", "dep:predicates-tree"]
 assert-color = ["assert", "dep:anstream", "dep:anstyle", "predicates/color"]
