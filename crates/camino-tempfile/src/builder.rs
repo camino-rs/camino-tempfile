@@ -108,9 +108,7 @@ impl<'a, 'b> Builder<'a, 'b> {
     /// # }
     /// # fn run() -> Result<(), io::Error> {
     /// # use camino_tempfile::Builder;
-    /// let named_tempfile = Builder::new()
-    ///     .prefix("my-temporary-note")
-    ///     .tempfile()?;
+    /// let named_tempfile = Builder::new().prefix("my-temporary-note").tempfile()?;
     /// # Ok(())
     /// # }
     /// ```
@@ -135,9 +133,7 @@ impl<'a, 'b> Builder<'a, 'b> {
     /// # }
     /// # fn run() -> Result<(), io::Error> {
     /// # use camino_tempfile::Builder;
-    /// let named_tempfile = Builder::new()
-    ///     .suffix(".txt")
-    ///     .tempfile()?;
+    /// let named_tempfile = Builder::new().suffix(".txt").tempfile()?;
     /// # Ok(())
     /// # }
     /// ```
@@ -161,9 +157,7 @@ impl<'a, 'b> Builder<'a, 'b> {
     /// # }
     /// # fn run() -> Result<(), io::Error> {
     /// # use camino_tempfile::Builder;
-    /// let named_tempfile = Builder::new()
-    ///     .rand_bytes(5)
-    ///     .tempfile()?;
+    /// let named_tempfile = Builder::new().rand_bytes(5).tempfile()?;
     /// # Ok(())
     /// # }
     /// ```
@@ -187,9 +181,7 @@ impl<'a, 'b> Builder<'a, 'b> {
     /// # }
     /// # fn run() -> Result<(), io::Error> {
     /// # use camino_tempfile::Builder;
-    /// let named_tempfile = Builder::new()
-    ///     .append(true)
-    ///     .tempfile()?;
+    /// let named_tempfile = Builder::new().append(true).tempfile()?;
     /// # Ok(())
     /// # }
     /// ```
@@ -295,9 +287,7 @@ impl<'a, 'b> Builder<'a, 'b> {
     /// ```
     /// use camino_tempfile::Builder;
     ///
-    /// let named_tempfile = Builder::new()
-    ///     .disable_cleanup(true)
-    ///     .tempfile()?;
+    /// let named_tempfile = Builder::new().disable_cleanup(true).tempfile()?;
     /// # Ok::<(), std::io::Error>(())
     /// ```
     pub fn disable_cleanup(&mut self, disable_cleanup: bool) -> &mut Self {
@@ -394,9 +384,8 @@ impl<'a, 'b> Builder<'a, 'b> {
     /// # Examples
     ///
     /// ```
-    /// use std::fs::File;
-    /// use std::io::Write;
     /// use camino_tempfile::Builder;
+    /// use std::{fs::File, io::Write};
     ///
     /// # use std::io;
     /// # fn run() -> Result<(), io::Error> {
@@ -425,9 +414,11 @@ impl<'a, 'b> Builder<'a, 'b> {
     /// # Examples
     ///
     /// ```
-    /// use std::fs::{self, File};
-    /// use std::io::Write;
     /// use camino_tempfile::Builder;
+    /// use std::{
+    ///     fs::{self, File},
+    ///     io::Write,
+    /// };
     ///
     /// # use std::io;
     /// # fn run() -> Result<(), io::Error> {

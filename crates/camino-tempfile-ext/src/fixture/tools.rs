@@ -22,7 +22,6 @@ pub trait PathCreateDir {
     /// temp.child("subdir").create_dir_all().unwrap();
     /// temp.close().unwrap();
     /// ```
-    ///
     fn create_dir_all(&self) -> Result<(), FixtureError>;
 }
 
@@ -33,7 +32,6 @@ impl PathCreateDir for ChildPath {
 }
 
 /// Create empty files at [`ChildPath`].
-///
 pub trait FileTouch {
     /// Create an empty file at [`ChildPath`].
     ///
@@ -46,7 +44,6 @@ pub trait FileTouch {
     /// temp.child("foo.txt").touch().unwrap();
     /// temp.close().unwrap();
     /// ```
-    ///
     fn touch(&self) -> Result<(), FixtureError>;
 }
 
@@ -63,7 +60,6 @@ impl FileTouch for NamedUtf8TempFile {
 }
 
 /// Write a binary file at [`ChildPath`].
-///
 pub trait FileWriteBin {
     /// Write a binary file at [`ChildPath`].
     ///
@@ -73,13 +69,11 @@ pub trait FileWriteBin {
     /// use camino_tempfile_ext::prelude::*;
     ///
     /// let temp = Utf8TempDir::new().unwrap();
-    /// temp
-    ///     .child("foo.txt")
+    /// temp.child("foo.txt")
     ///     .write_binary(b"To be or not to be...")
     ///     .unwrap();
     /// temp.close().unwrap();
     /// ```
-    ///
     fn write_binary(&self, data: &[u8]) -> Result<(), FixtureError>;
 }
 
@@ -105,10 +99,9 @@ pub trait FileWriteStr {
     /// use camino_tempfile_ext::prelude::*;
     ///
     /// let temp = Utf8TempDir::new().unwrap();
-    /// temp
-    ///    .child("foo.txt")
-    ///    .write_str("To be or not to be...")
-    ///    .unwrap();
+    /// temp.child("foo.txt")
+    ///     .write_str("To be or not to be...")
+    ///     .unwrap();
     /// temp.close().unwrap();
     /// ```
     fn write_str(&self, data: &str) -> Result<(), FixtureError>;
@@ -137,13 +130,11 @@ pub trait FileWriteFile {
     /// use camino_tempfile_ext::prelude::*;
     ///
     /// let temp = Utf8TempDir::new().unwrap();
-    /// temp
-    ///    .child("foo.txt")
-    ///    .write_file(Utf8Path::new("Cargo.toml"))
-    ///    .unwrap();
+    /// temp.child("foo.txt")
+    ///     .write_file(Utf8Path::new("Cargo.toml"))
+    ///     .unwrap();
     /// temp.close().unwrap();
     /// ```
-    ///
     fn write_file(&self, data: &Utf8Path) -> Result<(), FixtureError>;
 }
 
@@ -201,7 +192,6 @@ impl PathCopy for ChildPath {
 }
 
 /// Create a symlink to a target file.
-///
 pub trait SymlinkToFile {
     /// Create a symlink to the provided target file.
     ///
@@ -214,7 +204,9 @@ pub trait SymlinkToFile {
     /// let real_file = temp.child("real_file");
     /// real_file.touch().unwrap();
     ///
-    /// temp.child("link_file").symlink_to_file(real_file.as_path()).unwrap();
+    /// temp.child("link_file")
+    ///     .symlink_to_file(real_file.as_path())
+    ///     .unwrap();
     ///
     /// temp.close().unwrap();
     /// ```
@@ -246,7 +238,9 @@ pub trait SymlinkToDir {
     /// let real_dir = temp.child("real_dir");
     /// real_dir.create_dir_all().unwrap();
     ///
-    /// temp.child("link_dir").symlink_to_dir(real_dir.as_path()).unwrap();
+    /// temp.child("link_dir")
+    ///     .symlink_to_dir(real_dir.as_path())
+    ///     .unwrap();
     ///
     /// temp.close().unwrap();
     /// ```
