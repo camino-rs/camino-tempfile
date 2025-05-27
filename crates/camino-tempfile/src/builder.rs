@@ -1,7 +1,7 @@
 // Copyright (c) The camino-tempfile Contributors
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-use crate::{helpers::utf8_env_temp_dir, NamedUtf8TempFile, Utf8TempDir};
+use crate::{NamedUtf8TempFile, Utf8TempDir, helpers::utf8_env_temp_dir};
 use camino::{Utf8Path, Utf8PathBuf};
 use std::{convert::TryFrom, io};
 
