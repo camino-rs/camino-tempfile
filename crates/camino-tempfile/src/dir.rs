@@ -27,8 +27,10 @@ use tempfile::TempDir;
 ///
 /// ```
 /// use camino_tempfile::tempdir;
-/// use std::fs::File;
-/// use std::io::{self, Write};
+/// use std::{
+///     fs::File,
+///     io::{self, Write},
+/// };
 ///
 /// # fn main() {
 /// #     if let Err(_) = run() {
@@ -74,8 +76,10 @@ pub fn tempdir() -> io::Result<Utf8TempDir> {
 ///
 /// ```
 /// use camino_tempfile::tempdir_in;
-/// use std::fs::File;
-/// use std::io::{self, Write};
+/// use std::{
+///     fs::File,
+///     io::{self, Write},
+/// };
 ///
 /// # fn main() {
 /// #     if let Err(_) = run() {
@@ -136,9 +140,8 @@ pub fn tempdir_in<P: AsRef<Utf8Path>>(dir: P) -> io::Result<Utf8TempDir> {
 /// Create a temporary directory with a generated name:
 ///
 /// ```
-/// use std::fs::File;
-/// use std::io::Write;
 /// use camino_tempfile::Utf8TempDir;
+/// use std::{fs::File, io::Write};
 ///
 /// # use std::io;
 /// # fn run() -> Result<(), io::Error> {
@@ -151,9 +154,8 @@ pub fn tempdir_in<P: AsRef<Utf8Path>>(dir: P) -> io::Result<Utf8TempDir> {
 /// Create a temporary directory with a prefix in its name:
 ///
 /// ```
-/// use std::fs::File;
-/// use std::io::Write;
 /// use camino_tempfile::Builder;
+/// use std::{fs::File, io::Write};
 ///
 /// # use std::io;
 /// # fn run() -> Result<(), io::Error> {
@@ -190,9 +192,8 @@ impl Utf8TempDir {
     /// # Examples
     ///
     /// ```
-    /// use std::fs::File;
-    /// use std::io::Write;
     /// use camino_tempfile::Utf8TempDir;
+    /// use std::{fs::File, io::Write};
     ///
     /// # use std::io;
     /// # fn run() -> Result<(), io::Error> {
@@ -222,9 +223,11 @@ impl Utf8TempDir {
     /// # Examples
     ///
     /// ```
-    /// use std::fs::{self, File};
-    /// use std::io::Write;
     /// use camino_tempfile::Utf8TempDir;
+    /// use std::{
+    ///     fs::{self, File},
+    ///     io::Write,
+    /// };
     ///
     /// # use std::io;
     /// # fn run() -> Result<(), io::Error> {
@@ -251,9 +254,11 @@ impl Utf8TempDir {
     /// # Examples
     ///
     /// ```
-    /// use std::fs::{self, File};
-    /// use std::io::Write;
     /// use camino_tempfile::Utf8TempDir;
+    /// use std::{
+    ///     fs::{self, File},
+    ///     io::Write,
+    /// };
     ///
     /// # use std::io;
     /// # fn run() -> Result<(), io::Error> {
@@ -279,9 +284,11 @@ impl Utf8TempDir {
     /// # Examples
     ///
     /// ```
-    /// use std::fs::{self, File};
-    /// use std::io::Write;
     /// use camino_tempfile::Utf8TempDir;
+    /// use std::{
+    ///     fs::{self, File},
+    ///     io::Write,
+    /// };
     ///
     /// # use std::io;
     /// # fn run() -> Result<(), io::Error> {
@@ -310,9 +317,11 @@ impl Utf8TempDir {
     /// # Examples
     ///
     /// ```
-    /// use std::fs::{self, File};
-    /// use std::io::Write;
     /// use camino_tempfile::Utf8TempDir;
+    /// use std::{
+    ///     fs::{self, File},
+    ///     io::Write,
+    /// };
     ///
     /// // Create a directory inside of the current directory
     /// let tmp_dir = Utf8TempDir::with_suffix("-foo")?;
@@ -335,9 +344,11 @@ impl Utf8TempDir {
     /// # Examples
     ///
     /// ```
-    /// use std::fs::{self, File};
-    /// use std::io::Write;
     /// use camino_tempfile::Utf8TempDir;
+    /// use std::{
+    ///     fs::{self, File},
+    ///     io::Write,
+    /// };
     ///
     /// // Create a directory inside of the current directory
     /// let tmp_dir = Utf8TempDir::with_suffix_in("-foo", ".")?;
@@ -364,13 +375,13 @@ impl Utf8TempDir {
     /// let tmp_path;
     ///
     /// {
-    ///    let tmp_dir = Utf8TempDir::new()?;
-    ///    tmp_path = tmp_dir.path().to_owned();
+    ///     let tmp_dir = Utf8TempDir::new()?;
+    ///     tmp_path = tmp_dir.path().to_owned();
     ///
-    ///    // Check that the temp directory actually exists.
-    ///    assert!(tmp_path.exists());
+    ///     // Check that the temp directory actually exists.
+    ///     assert!(tmp_path.exists());
     ///
-    ///    // End of `tmp_dir` scope, directory will be deleted
+    ///     // End of `tmp_dir` scope, directory will be deleted
     /// }
     ///
     /// // Temp directory should be deleted by now
@@ -398,8 +409,8 @@ impl Utf8TempDir {
     /// # Examples
     ///
     /// ```
-    /// use std::fs;
     /// use camino_tempfile::Utf8TempDir;
+    /// use std::fs;
     ///
     /// # use std::io;
     /// # fn run() -> Result<(), io::Error> {
@@ -448,9 +459,8 @@ impl Utf8TempDir {
     /// # Examples
     ///
     /// ```
-    /// use std::fs::File;
-    /// use std::io::Write;
     /// use camino_tempfile::Utf8TempDir;
+    /// use std::{fs::File, io::Write};
     ///
     /// # use std::io;
     /// # fn run() -> Result<(), io::Error> {

@@ -73,7 +73,10 @@
 //!
 //! // Spawn the `touch` command inside the temporary directory and collect the exit status
 //! // Note that `temp_dir` is **not** moved into `current_dir`, but passed as a reference
-//! let exit_status = Command::new("touch").arg("tmp").current_dir(&temp_dir).status()?;
+//! let exit_status = Command::new("touch")
+//!     .arg("tmp")
+//!     .current_dir(&temp_dir)
+//!     .status()?;
 //! assert!(exit_status.success());
 //!
 //! # Ok(())
@@ -114,7 +117,7 @@
 //!
 //! ```
 //! use camino_tempfile::NamedUtf8TempFile;
-//! use std::io::{self, Write, Read};
+//! use std::io::{self, Read, Write};
 //!
 //! # fn main() {
 //! #     if let Err(_) = run() {
@@ -145,8 +148,10 @@
 //!
 //! ```
 //! use camino_tempfile::tempdir;
-//! use std::fs::File;
-//! use std::io::{self, Write};
+//! use std::{
+//!     fs::File,
+//!     io::{self, Write},
+//! };
 //!
 //! # fn main() {
 //! #     if let Err(_) = run() {
