@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2] - 2025-06-29
+
+### Fixed
+
+- Optional features are now documented on docs.rs ([#7]).
+
+[#7]: https://github.com/camino-rs/camino-tempfile/issues/7
+
 ## [0.3.1] - 2025-05-27
 
 ### Added
@@ -38,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release.
 
+[0.3.2]: https://github.com/camino-rs/camino-tempfile/releases/tag/camino-tempfile-ext-0.3.2
 [0.3.1]: https://github.com/camino-rs/camino-tempfile/releases/tag/camino-tempfile-ext-0.3.1
 [0.3.0]: https://github.com/camino-rs/camino-tempfile/releases/tag/camino-tempfile-ext-0.3.0
 [0.2.0]: https://github.com/camino-rs/camino-tempfile/releases/tag/camino-tempfile-ext-0.2.0

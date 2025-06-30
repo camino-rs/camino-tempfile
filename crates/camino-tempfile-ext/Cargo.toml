@@ -10,6 +10,13 @@ repository.workspace = true
 keywords = ["tempfile", "tmpfile", "filesystem", "camino"]
 categories = ["filesystem", "os"]
 
+[package.metadata.cargo-sync-rdme.rustdoc]
+html-root-url = "https://camino-rs.github.io/camino-tempfile"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg=doc_cfg"]
+
 [lints]
 workspace = true
 
@@ -29,6 +36,3 @@ anyhow.workspace = true
 [features]
 assert = ["dep:predicates", "dep:predicates-core", "dep:predicates-tree"]
 assert-color = ["assert", "dep:anstream", "dep:anstyle", "predicates/color"]
-
-[package.metadata.cargo-sync-rdme.rustdoc]
-html-root-url = "https://camino-rs.github.io/camino-tempfile"

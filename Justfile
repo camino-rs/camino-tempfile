@@ -12,7 +12,8 @@ powerset *args:
 
 # Build docs for crates and direct dependencies
 rustdoc *args:
-    @cargo tree --depth 1 -e normal --prefix none --workspace --all-features \
+    #!/usr/bin/env sh
+    cargo tree --depth 1 -e normal --prefix none --workspace --all-features \
         | gawk '{ gsub(" v", "@", $0); printf("%s\n", $1); }' \
         | xargs printf -- '-p %s\n' \
         | RUSTC_BOOTSTRAP=1 RUSTDOCFLAGS="$RUSTDOCFLAGS --cfg=doc_cfg" xargs cargo doc --no-deps --all-features {{args}}
