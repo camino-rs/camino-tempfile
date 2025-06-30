@@ -186,7 +186,7 @@ pub fn test_remove_dir_all_ok() {
     let tmpdir = tmpdir.path();
     let root = tmpdir.join("foo");
 
-    println!("making {}", root);
+    println!("making {root}");
     t!(fs::create_dir(&root));
     t!(fs::create_dir(root.join("foo")));
     t!(fs::create_dir(root.join("foo").join("bar")));
