@@ -48,7 +48,7 @@ camino-tempfile-ext’s MSRV is **Rust 1.74**. At any time, at least the last
 
 Portions of camino-tempfile-ext have been adapted from [`assert_fs`] (thank
 you to the upstream maintainers!). If you need to work with
-[`std::path::Path`](https://doc.rust-lang.org/nightly/std/path/struct.Path.html) rather than [`camino::Utf8Path`](https://docs.rs/camino/1.1.9/camino/struct.Utf8Path.html), check out
+[`std::path::Path`](https://doc.rust-lang.org/nightly/std/path/struct.Path.html) rather than [`camino::Utf8Path`](https://docs.rs/camino/1.2.1/camino/struct.Utf8Path.html), check out
 [`assert_fs`].
 
 Upstream code is used under the terms of the MIT and Apache 2.0 licenses.
