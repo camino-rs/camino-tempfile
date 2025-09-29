@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.3] - 2025-09-29
+
+### Fixed
+
+Replaced obsolete `doc_auto_cfg` with `doc_cfg`, to fix Rust nightly builds with the `doc_cfg` flag enabled.
+
 ## [0.3.2] - 2025-06-29
 
 ### Fixed
@@ -46,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release.
 
+[0.3.3]: https://github.com/camino-rs/camino-tempfile/releases/tag/camino-tempfile-ext-0.3.3
 [0.3.2]: https://github.com/camino-rs/camino-tempfile/releases/tag/camino-tempfile-ext-0.3.2
 [0.3.1]: https://github.com/camino-rs/camino-tempfile/releases/tag/camino-tempfile-ext-0.3.1
 [0.3.0]: https://github.com/camino-rs/camino-tempfile/releases/tag/camino-tempfile-ext-0.3.0
