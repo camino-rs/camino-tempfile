@@ -10,10 +10,16 @@ jobs:
   camino-tempfile-release:
     if: github.repository_owner == 'camino-rs' && startsWith(github.ref_name, 'camino-tempfile-1')
     runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - uses: rust-lang/crates-io-auth-action@v1
+        id: auth
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Install cargo release
@@ -30,15 +36,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: just ci-cargo-release camino-tempfile
         env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
 
   camino-tempfile-ext-release:
     if: github.repository_owner == 'camino-rs' && startsWith(github.ref_name, 'camino-tempfile-ext-')
     runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - uses: rust-lang/crates-io-auth-action@v1
+        id: auth
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Install cargo release
@@ -55,4 +67,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: just ci-cargo-release camino-tempfile-ext
         env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
