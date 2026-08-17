@@ -39,7 +39,7 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         # 2025-08-31 is a known toolchain that works with cargo-sync-rdme
         with:
-          toolchain: nightly-2025-08-31
+          toolchain: nightly-2026-04-30
       - name: Regenerate readmes
         run: just generate-readmes
       - name: Check for differences

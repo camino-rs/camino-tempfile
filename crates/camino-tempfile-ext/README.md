@@ -48,14 +48,16 @@ camino-tempfile-ext’s MSRV is **Rust 1.74**. At any time, at least the last
 
 Portions of camino-tempfile-ext have been adapted from [`assert_fs`] (thank
 you to the upstream maintainers!). If you need to work with
-[`std::path::Path`](https://doc.rust-lang.org/nightly/std/path/struct.Path.html) rather than [`camino::Utf8Path`](https://docs.rs/camino/1.2.1/camino/struct.Utf8Path.html), check out
+[`std::path::Path`] rather than [`camino::Utf8Path`], check out
 [`assert_fs`].
 
 Upstream code is used under the terms of the MIT and Apache 2.0 licenses.
 
-[`camino-tempfile`]: https://docs.rs/camino-tempfile/1.4.1/camino_tempfile/index.html
-[`Utf8TempDir`]: https://docs.rs/camino-tempfile/1.4.1/camino_tempfile/dir/struct.Utf8TempDir.html
+[`camino-tempfile`]: https://docs.rs/camino-tempfile/1.4.1/camino_tempfile/index.html "module camino_tempfile"
+[`Utf8TempDir`]: https://docs.rs/camino-tempfile/1.4.1/camino_tempfile/dir/struct.Utf8TempDir.html "struct camino_tempfile::dir::Utf8TempDir"
 [`assert_fs`]: https://crates.io/crates/assert_fs
+[`std::path::Path`]: https://doc.rust-lang.org/nightly/std/path/struct.Path.html "struct std::path::Path"
+[`camino::Utf8Path`]: https://docs.rs/camino/1.2.1/camino/struct.Utf8Path.html "struct camino::Utf8Path"
 <!-- cargo-sync-rdme ]] -->
 
 ## License
